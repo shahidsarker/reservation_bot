@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "PORT=3001 nodemon ./bin/www",
-    "start_windows": "set PORT=3001&&nodemon ./bin/www"
+    "start_windows": "set PORT=3001&&nodemon ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -19,5 +20,8 @@
     "pug": "^2.0.4",
     "sequelize": "^5.10.1",
     "twilio": "^3.33.1"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
   }
 }
