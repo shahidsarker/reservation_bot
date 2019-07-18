@@ -20,9 +20,7 @@ const parseDateTime = messageArray => {
 };
 
 const validateReservation = dateTime => {
-  // TODO: fix to check for true dateTime instead of checking 3 failing conditions
   const currentDate = new Date();
-
   if (
     dateTime > currentDate &&
     13 <= dateTime.getHours() &&
@@ -61,7 +59,7 @@ const slackReservationMaker = slackReq => {
     const reservationObject = {
       person_name: messageArray[0],
       date: reservationDate,
-      phonenumber: slackReq.user_name,
+      phonenumber: `${slackReq.user_name}@${slackReq.team_domain}`,
       raw_body: slackReq
     };
     return reservationObject;
