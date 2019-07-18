@@ -106,6 +106,10 @@ router.post("/slack", (req, res, next) => {
         console.log(pgres);
         return pgres;
       })
+      .catch(err => {
+        console.log(err);
+        res.send(500).send("Reservation error");
+      })
       .then(reservation => {
         res
           .send(`Reservation successfully made for ${reservation.person_name}`)
