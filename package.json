@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodem ./server/bin/www",
+    "start": "node ./server/bin/www",
     "start-dev": "PORT=3001 nodemon ./server/bin/www",
     "heroku-postbuild": "cd client && npm install && npm build",
     "test": "jest"
