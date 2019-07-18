@@ -22,7 +22,7 @@ class ReservationsList extends Component {
         <h1>Reservations</h1>
         {this.state.reservations.map(reservation => (
           <div key={reservation.id}>
-            {reservation.name}'s reservation is on {reservation.date} at{" "}
+            {reservation.person_name}'s reservation is on {reservation.date} at{" "}
             {reservation.time}
           </div>
         ))}
