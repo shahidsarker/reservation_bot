@@ -64,7 +64,6 @@ const database = [
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
-  console.log(req);
   const currentDate = new Date();
 
   Reservation.findAll({ where: { date: { [Op.gt]: currentDate } } })
