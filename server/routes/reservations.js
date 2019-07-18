@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 const { reservationMaker } = require("./reservations.helper");
+const Reservation = require("../models").Reservation;
+
 // const database = [];
 const database = [
   {
@@ -68,7 +70,15 @@ router.post("/sms", (req, res, next) => {
 
   const reservation = reservationMaker(req.body);
   if (reservation) {
-    database.push(reservation);
+    // database.push(reservation);
+    Reservation.create({
+      person_name: reservation.name,
+      date: reservation.dateTime,
+      phonenumber: reservation.phoneNumber,
+      raw_body: reservation.rawMessage
+    }).then(reservation => {
+      console.log(reservation);
+    });
     twiml.message("Your reservation was successful");
   } else {
     twiml.message(

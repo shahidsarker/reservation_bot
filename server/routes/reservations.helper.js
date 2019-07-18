@@ -41,12 +41,10 @@ const reservationMaker = twilioReq => {
 
   if (validateReservation(reservationDate)) {
     const reservationObject = {
-      id: Date.now(),
       name: messageArray[0],
       dateTime: reservationDate,
       phoneNumber: twilioReq.From,
-      rawMessage: twilioReq,
-      createdAt: new Date()
+      rawMessage: twilioReq
     };
 
     return reservationObject;
