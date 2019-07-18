@@ -11,6 +11,8 @@ const MessagingResponse = require("twilio").twiml.MessagingResponse;
 
 var app = express();
 
+const db = require("./models");
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
