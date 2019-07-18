@@ -8,7 +8,7 @@ class ReservationsList extends Component {
       // .then(reservations => this.setState({ reservations }));
       .then(reservations => {
         reservations.map(reser => {
-          const dateTimeObj = new Date(reser.dateTime);
+          const dateTimeObj = new Date(reser.date);
           reser.date = dateTimeObj.toDateString();
           reser.time = dateTimeObj.toLocaleTimeString("en-US");
           return reser;
