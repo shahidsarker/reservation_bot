@@ -3,6 +3,8 @@ var router = express.Router();
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 const { reservationMaker } = require("./reservations.helper");
 const Reservation = require("../models").Reservation;
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 // const database = [];
 const database = [
@@ -56,12 +58,18 @@ const database = [
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
+  console.log(req);
   const currentDate = new Date();
   // res.send('respond with a resource');
-  const filteredDatabase = database.filter(
-    reservation => reservation.dateTime > currentDate
-  );
-  res.json(filteredDatabase);
+  // const filteredDatabase = database.filter(
+  //   reservation => reservation.dateTime > currentDate
+  // );
+
+  Reservation.findAll({ where: { date: { [Op.gte]: currentDate } } })
+    .then(reservations => {
+      res.json(reservations);
+    })
+    .catch(err => res.status(400).send(err));
 });
 
 /* POST user request reservation through message and create new reservation*/
