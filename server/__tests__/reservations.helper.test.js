@@ -2,7 +2,8 @@ const {
   reservationMaker,
   parseRequestBody,
   parseDateTime,
-  validateReservation
+  validateReservation,
+  slackReservationMaker
 } = require("./../routes/reservations.helper");
 
 const mockMessage = "John 9-15 4pm";
@@ -55,6 +56,20 @@ const invalidRequest = {
   AccountSid: "QmXxjiKhe8RxJwzohdMYxzezO7xA0ndGsP",
   From: "+42605842845",
   ApiVersion: "2010-04-01"
+};
+
+const dummySlackRequest = {
+  token: "gIkuvaNzQIHg97ATvDxqgjtO",
+  team_id: "T0001",
+  team_domain: "example",
+  channel_id: "C2147483705",
+  channel_name: "test",
+  user_id: "U2147483697",
+  user_name: "Steve",
+  command: "/rez",
+  text: "Steve 12-21 4pm",
+  response_url: "https://hooks.slack.com/commands/1234/5678",
+  trigger_id: "13345224609.738474920.8088930838d88f008e0"
 };
 
 const outsideOpenHoursReservationHour = 11; //11am
@@ -128,6 +143,8 @@ test("reservationMaker return reservationObject", () => {
 test("reservationMaker return null", () => {
   expect(reservationMaker(invalidRequest)).toBeNull();
 });
-// test.todo("");
+
+test.todo("slackReservationMaker return reservationObject");
+test.todo("slackReservationMaker return null");
 // test.todo("");
 // test.todo("");
