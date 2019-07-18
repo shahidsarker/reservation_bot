@@ -1,10 +1,16 @@
 var express = require("express");
 var router = express.Router();
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
-const { reservationMaker } = require("./reservations.helper");
+const {
+  reservationMaker,
+  slackReservationMaker
+} = require("./reservations.helper");
 const Reservation = require("../models").Reservation;
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+
+const wrongFormatMessage =
+  'Your reservation was invalid, please request with "Name Date [mm-dd] Time [hh]", between 1pm and 9pm';
 
 // const database = [];
 const database = [
@@ -84,13 +90,31 @@ router.post("/sms", (req, res, next) => {
     });
     twiml.message("Your reservation was successful");
   } else {
-    twiml.message(
-      'Your reservation was invalid, please request with "Name Date [mm-dd] Time [hh]", between 1pm and 9pm'
-    );
+    twiml.message(wrongFormatMessage);
   }
 
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
+});
+
+router.post("/slack", (req, res, next) => {
+  const reservation = slackReservationMaker(req.body);
+  console.log(reservation);
+  if (reservation) {
+    Reservation.create(reservation)
+      .then(pgres => {
+        console.log(pgres);
+        return pgres;
+      })
+      .then(reservation => {
+        res
+          .send(`Reservation successfully made for ${reservation.person_name}`)
+          .end();
+      });
+    // .catch(err => res.send("Sorry, could not make"));
+  } else {
+    res.send(wrongFormatMessage).end();
+  }
 });
 
 module.exports = router;
