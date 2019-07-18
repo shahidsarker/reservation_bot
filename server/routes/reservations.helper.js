@@ -22,16 +22,15 @@ const parseDateTime = messageArray => {
 const validateReservation = dateTime => {
   // TODO: fix to check for true dateTime instead of checking 3 failing conditions
   const currentDate = new Date();
-  if (dateTime == "Invalid Date") {
-    return false;
-  } else if (dateTime < currentDate) {
-    //check if the reservation date and time past today
-    return false;
-  } else if (dateTime.getHours() < 13 || dateTime.getHours() > 21) {
-    //check if the request time is between 1pm and 9pm (store opening between 1pm to 10pm, 1 hour duration)
-    return false;
+
+  if (
+    dateTime > currentDate &&
+    13 <= dateTime.getHours() &&
+    dateTime.getHours() <= 21
+  ) {
+    return true;
   }
-  return true;
+  return false;
 };
 
 const reservationMaker = twilioReq => {

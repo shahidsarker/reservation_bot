@@ -57,7 +57,7 @@ const invalidRequest = {
   ApiVersion: "2010-04-01"
 };
 
-const outsideOpenHoursReservationHour = 11; //11pm
+const outsideOpenHoursReservationHour = 11; //11am
 const reservationDate = new Date(
   currentYear,
   9,
@@ -108,7 +108,7 @@ test("validateReservation false past date", () => {
 });
 
 test("validateReservation false outside open hours", () => {
-  expect(validateReservation(reservationDate)).toBeFalsy();
+  expect(validateReservation(reservationDate)).toBe(false);
 });
 
 test("reservationMaker return reservationObject", () => {
