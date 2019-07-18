@@ -60,12 +60,8 @@ const database = [
 router.get("/", function(req, res, next) {
   console.log(req);
   const currentDate = new Date();
-  // res.send('respond with a resource');
-  // const filteredDatabase = database.filter(
-  //   reservation => reservation.dateTime > currentDate
-  // );
 
-  Reservation.findAll({ where: { date: { [Op.gte]: currentDate } } })
+  Reservation.findAll({ where: { date: { [Op.gt]: currentDate } } })
     .then(reservations => {
       res.json(reservations);
     })
@@ -78,7 +74,6 @@ router.post("/sms", (req, res, next) => {
 
   const reservation = reservationMaker(req.body);
   if (reservation) {
-    // database.push(reservation);
     Reservation.create({
       person_name: reservation.name,
       date: reservation.dateTime,
