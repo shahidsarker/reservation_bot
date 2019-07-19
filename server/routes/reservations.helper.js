@@ -20,9 +20,7 @@ const parseDateTime = messageArray => {
 };
 
 const validateReservation = dateTime => {
-  // TODO: fix to check for true dateTime instead of checking 3 failing conditions
   const currentDate = new Date();
-
   if (
     dateTime > currentDate &&
     13 <= dateTime.getHours() &&
@@ -40,14 +38,30 @@ const reservationMaker = twilioReq => {
 
   if (validateReservation(reservationDate)) {
     const reservationObject = {
-      id: Date.now(),
       name: messageArray[0],
       dateTime: reservationDate,
       phoneNumber: twilioReq.From,
-      rawMessage: twilioReq,
-      createdAt: new Date()
+      rawMessage: twilioReq
     };
 
+    return reservationObject;
+  } else {
+    return null;
+  }
+};
+
+const slackReservationMaker = slackReq => {
+  const messageArray = parseRequestBody(slackReq.text);
+
+  const reservationDate = parseDateTime(messageArray);
+
+  if (validateReservation(reservationDate)) {
+    const reservationObject = {
+      person_name: messageArray[0],
+      date: reservationDate,
+      phonenumber: `${slackReq.user_name}@${slackReq.team_domain}`,
+      raw_body: slackReq
+    };
     return reservationObject;
   } else {
     return null;
@@ -58,5 +72,6 @@ module.exports = {
   reservationMaker,
   parseRequestBody,
   parseDateTime,
-  validateReservation
+  validateReservation,
+  slackReservationMaker
 };
