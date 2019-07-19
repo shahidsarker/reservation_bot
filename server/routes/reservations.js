@@ -73,7 +73,7 @@ router.get("/", function(req, res, next) {
     .catch(err =>
       res
         .status(400)
-        .send(err)
+        .send("None found")
         .end()
     );
 });
