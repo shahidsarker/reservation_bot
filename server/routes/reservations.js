@@ -66,9 +66,11 @@ const database = [
 router.get("/", function(req, res, next) {
   const currentDate = new Date();
 
-  Reservation.findAll({ where: { date: { [Op.gt]: currentDate } } })
+  Reservation.findAll({
+    where: { date: { [Op.gt]: currentDate } },
+    attributes: ["id", "person_name", "date"]
+  })
     .then(reservations => {
-      reservations.map(reservation => delete reservation.raw_body);
       res.json(reservations).end();
     })
     .catch(err =>
