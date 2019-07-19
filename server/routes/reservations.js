@@ -68,9 +68,14 @@ router.get("/", function(req, res, next) {
 
   Reservation.findAll({ where: { date: { [Op.gt]: currentDate } } })
     .then(reservations => {
-      res.json(reservations);
+      res.json(reservations).end();
     })
-    .catch(err => res.status(400).send(err));
+    .catch(err =>
+      res
+        .status(400)
+        .send(err)
+        .end()
+    );
 });
 
 /* POST user request reservation through message and create new reservation*/
