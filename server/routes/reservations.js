@@ -68,6 +68,7 @@ router.get("/", function(req, res, next) {
 
   Reservation.findAll({ where: { date: { [Op.gt]: currentDate } } })
     .then(reservations => {
+      reservations.map(reservation => delete reservation.raw_body);
       res.json(reservations).end();
     })
     .catch(err =>
