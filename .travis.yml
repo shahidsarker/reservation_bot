@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "node"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+deploy:
+  provider: heroku
+  api_key:
+    secure: iRhqPOO3csew81zL67lh+cV1vz/XPJXszgmUUa6yIbhe3KqIMRsP/cSgCD53kH8oy6xMB0SxhVE69omv/E0xuGR+J5ZZs0pd5gFx+FaLmmVR0h+AyvJVMLm4z1cVrGDn+H2M+dGrWYwZ2I8JTJoXdulfFvNLzf4R9lUB7QQcGzvYfSrtdp/YDs8zzpg26rclUYPDfTgUK7wGvnXQan+1dhI9pY44C5GITancq9XtdjgzfyjkdtIEZ/o7XQwdMjHLCqdvxqyRHZTThgTZslGcqNJKRu2jh40qe0iTg2h+59rD+sbqJQJjab6dY2ZGLsfLCAODpRM4cyV+o+Ia3ajLupGO3uQZkQyCPFr/U11CW7qNv1hfhniYfIx+xJmNJD8wXJfTuInOpgyqYE53t9hfSaundBEs5LonOMibrV3Au65+LvnCLnQyzrA039JfORG+hY4GOmwyTZ97qx8uQSuj9OzWc1JmguV0zVWPa4rQ1Hhz5w+wZxLpwMYPjlLePSeXNrek5YhnhF+Juq5eiHb05dRzZiQovDwOPerZq9wwYY8rZoGz7+3bLjxZMghHAfRYNlVJbD7/6BQ5j+by1sVWmHGflUjzsKSeDbmDrfcdNjdb7XGYbzmaFuiT3kU5PkiNqrma3LYZqvspEHonqEAejrskHkOzyLqMBGATsKap9tc=
+  app: rezbot-shahid

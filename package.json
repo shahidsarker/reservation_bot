@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=3001 nodemon ./bin/www",
-    "start_windows": "set PORT=3001&&nodemon ./bin/www",
-    "test": "jest"
+    "start": "node ./server/bin/www",
+    "start-dev": "PORT=3001 nodemon ./server/bin/www",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "test": "export NODE_ENV=test && cd server && jest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,14 +15,15 @@
     "express": "^4.16.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "nodemon": "^1.19.1",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
     "pug": "^2.0.4",
     "sequelize": "^5.10.1",
+    "sequelize-cli": "^5.5.0",
     "twilio": "^3.33.1"
   },
   "devDependencies": {
-    "jest": "^24.8.0"
+    "jest": "^24.7.1",
+    "nodemon": "^1.19.1"
   }
 }

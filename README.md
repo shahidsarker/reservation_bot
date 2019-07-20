@@ -1,5 +1,7 @@
 # Reservation Bot
 
+[![Build Status](https://travis-ci.com/shahidsarker/reservation_bot.svg?branch=master)](https://travis-ci.com/shahidsarker/reservation_bot)
+
 An app that connects with the Twilio API to receive texts and create restaurant reservations.
 
 ## Getting Started

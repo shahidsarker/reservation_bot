@@ -8,7 +8,7 @@ class ReservationsList extends Component {
       // .then(reservations => this.setState({ reservations }));
       .then(reservations => {
         reservations.map(reser => {
-          const dateTimeObj = new Date(reser.dateTime);
+          const dateTimeObj = new Date(reser.date);
           reser.date = dateTimeObj.toDateString();
           reser.time = dateTimeObj.toLocaleTimeString("en-US");
           return reser;
@@ -22,7 +22,7 @@ class ReservationsList extends Component {
         <h1>Reservations</h1>
         {this.state.reservations.map(reservation => (
           <div key={reservation.id}>
-            {reservation.name}'s reservation is on {reservation.date} at{" "}
+            {reservation.person_name}'s reservation is on {reservation.date} at{" "}
             {reservation.time}
           </div>
         ))}
