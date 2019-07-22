@@ -72,6 +72,20 @@ const dummySlackRequest = {
   trigger_id: "13345224609.738474920.8088930838d88f008e0"
 };
 
+const invalidSlackRequest = {
+  token: "gIkuvaNzQIHg97ATvDxqgjtO",
+  team_id: "T0001",
+  team_domain: "example",
+  channel_id: "C2147483705",
+  channel_name: "test",
+  user_id: "U2147483697",
+  user_name: "Steve",
+  command: "/rez",
+  text: "Steve 02-25 4pm",
+  response_url: "https://hooks.slack.com/commands/1234/5678",
+  trigger_id: "13345224609.738474920.8088930838d88f008e0"
+};
+
 const outsideOpenHoursReservationHour = 11; //11am
 const reservationDate = new Date(
   currentYear,
@@ -87,6 +101,13 @@ const expectedReservationObject = {
   phoneNumber: "+42605842845",
   rawMessage: futureRequest,
   createdAt: new Date()
+};
+
+const slackResultObj = {
+  person_name: "Steve",
+  date: new Date(currentYear, 11, 21, 16),
+  phonenumber: "Steve@example",
+  raw_body: dummySlackRequest
 };
 
 test("sms message is parsed by parseRequestBody", () => {
@@ -144,7 +165,13 @@ test("reservationMaker return null", () => {
   expect(reservationMaker(invalidRequest)).toBeNull();
 });
 
-test.todo("slackReservationMaker return reservationObject");
-test.todo("slackReservationMaker return null");
+test("slackReservationMaker return reservationObject", () => {
+  expect(slackReservationMaker(dummySlackRequest)).toStrictEqual(
+    slackResultObj
+  );
+});
+test("slackReservationMaker return null", () => {
+  expect(slackReservationMaker(invalidSlackRequest)).toBe(null);
+});
 // test.todo("");
 // test.todo("");
