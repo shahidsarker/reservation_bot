@@ -89,6 +89,13 @@ const expectedReservationObject = {
   createdAt: new Date()
 };
 
+const slackResultObj = {
+  person_name: "Steve",
+  date: new Date(currentYear, 11, 21, 16),
+  phonenumber: "Steve@example",
+  raw_body: dummySlackRequest
+};
+
 test("sms message is parsed by parseRequestBody", () => {
   expect(parseRequestBody("John 9-15 4pm")).toStrictEqual([
     "John",
@@ -144,7 +151,11 @@ test("reservationMaker return null", () => {
   expect(reservationMaker(invalidRequest)).toBeNull();
 });
 
-test.todo("slackReservationMaker return reservationObject");
+test("slackReservationMaker return reservationObject", () => {
+  expect(slackReservationMaker(dummySlackRequest)).toStrictEqual(
+    slackResultObj
+  );
+});
 test.todo("slackReservationMaker return null");
 // test.todo("");
 // test.todo("");
