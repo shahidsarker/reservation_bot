@@ -10,6 +10,7 @@ const mockMessage = "John 9-15 4pm";
 
 const currentDate = new Date();
 const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth();
 const validFutureDate = new Date(currentYear + 1, 1, 1, 15);
 const invalidDate = new Date(1, 13, 2, 2);
 const pastDate = new Date(currentYear - 1, 1, 1, 15);
@@ -25,7 +26,8 @@ const futureRequest = {
   FromState: "NY",
   SmsStatus: "received",
   FromCity: "NEW YORK",
-  Body: "John 09-25 4pm",
+  // Body: "John 09-25 4pm",
+  Body: `John ${currentMonth + 1}-25 4pm`,
   FromCountry: "US",
   To: "+23123052583",
   ToZip: "",
@@ -97,7 +99,7 @@ const reservationDate = new Date(
 const expectedReservationObject = {
   id: Date.now(),
   name: "John",
-  dateTime: new Date(currentYear, 8, 25, 16),
+  dateTime: new Date(currentYear, currentMonth, 25, 16),
   phoneNumber: "+42605842845",
   rawMessage: futureRequest,
   createdAt: new Date()
