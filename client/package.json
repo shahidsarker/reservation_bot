@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "clean-css": ">=4.1.11",
-    "constantinople": ">=3.1.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "^3.3.0",
-    "serialize-javascript": ">=2.1.1"
+    "clean-css": "^4.2.3",
+    "constantinople": "^4.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1",
+    "serialize-javascript": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
