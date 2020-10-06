@@ -10,20 +10,20 @@
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
-    "debug": "~4.1.1",
+    "debug": "~4.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http-errors": "~1.8.0",
     "morgan": "~1.10.0",
-    "pg": "^8.3.0",
+    "pg": "^8.4.0",
     "pg-hstore": "^2.3.3",
     "pug": "^3.0.0",
-    "sequelize": "^6.3.3",
+    "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0",
-    "twilio": "^3.48.1"
+    "twilio": "^3.49.4"
   },
   "devDependencies": {
-    "jest": "^26.2.1",
+    "jest": "^26.5.2",
     "nodemon": "^2.0.4"
   }
 }
